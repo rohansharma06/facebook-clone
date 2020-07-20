@@ -12,5 +12,5 @@ export function getFormBody(params) {
     formBody.push(encodedKey + '=' + encodedValue);
   }
 
-  return formBody.join('&');
+  return formBody.join('&'); //-- user%20name=abc&password=abc
 }
