@@ -9,12 +9,12 @@ import {
 import PropTypes from 'prop-types';
 
 import { fetchPosts } from '../action/posts';
-import { Home, NavBar, Page404, LogIn, SignUp } from './';
+import { Home, NavBar, Page404, LogIn, SignUp, Settings } from './';
 import * as jwtDecode from 'jwt-decode';
 import { authenticateUser } from '../action/auth';
 
 // const LogOut = () => <div>LogOut</div>;
-const settings = () => <div>Setting</div>;
+// const settings = () => <div>Setting</div>;
 const PrivateRoute = (privateRoutProps) => {
   const { isLoggedin, path, component: Component } = privateRoutProps;
 
@@ -67,7 +67,7 @@ class App extends React.Component {
             <Route path="/signup" component={SignUp} />
             <PrivateRoute
               path="/settings"
-              component={settings}
+              component={Settings}
               isLoggedin={auth.isLoggedin}
             />
             <Route component={Page404} />
