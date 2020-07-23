@@ -21,6 +21,7 @@ import {
 import * as jwtDecode from 'jwt-decode';
 import { authenticateUser } from '../action/auth';
 import { getAuthTokenFromLocalStorage } from '../helpers/utils';
+import { fetchUserFriends } from '../action/friends';
 
 // const LogOut = () => <div>LogOut</div>;
 // const userProfile = () => <div>User</div>;
@@ -65,12 +66,14 @@ class App extends React.Component {
           name: user.name,
         })
       );
+
+      this.props.dispatch(fetchUserFriends());
     }
   }
 
   render() {
     //console.log('PROPS', this.props);
-    const { posts, auth } = this.props;
+    const { posts, auth, friends } = this.props;
     return (
       <Router>
         <div>
@@ -81,7 +84,14 @@ class App extends React.Component {
               exact
               path="/"
               render={(props) => {
-                return <Home {...props} posts={posts} />;
+                return (
+                  <Home
+                    {...props}
+                    posts={posts}
+                    friends={friends}
+                    isLoggedin={auth.isLoggedin}
+                  />
+                );
               }}
             />
             <Route path="/login" component={LogIn} />
@@ -108,6 +118,7 @@ function mapStoreToProps(state) {
   return {
     posts: state.posts,
     auth: state.auth,
+    friends: state.friends,
   };
 }
 
