@@ -57,7 +57,7 @@ class App extends React.Component {
     if (token) {
       const user = jwtDecode(token);
 
-      console.log('user', user);
+      //console.log('user', user);
       this.props.dispatch(
         authenticateUser({
           email: user.email,
@@ -92,7 +92,7 @@ class App extends React.Component {
               isLoggedin={auth.isLoggedin}
             />
             <PrivateRoute
-              path="/user"
+              path="/user/:userId"
               component={UserProfile}
               isLoggedin={auth.isLoggedin}
             />
