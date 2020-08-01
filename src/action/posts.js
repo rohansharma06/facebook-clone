@@ -3,7 +3,7 @@ import { APIUrls } from '../helpers/urls';
 
 export function fetchPosts() {
   return (dispatch) => {
-    const url = APIUrls.fetchPosts(1, 5);
+    const url = APIUrls.fetchPosts(1, 25);
     fetch(url)
       .then((response) => {
         return response.json();
