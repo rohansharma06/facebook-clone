@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchUserProfile } from '../action/profile';
 import { APIUrls } from '../helpers/urls';
 import { getAuthTokenFromLocalStorage } from '../helpers/utils';
-import { addFriend } from '../action/friends';
+import { addFriend, removeFriend } from '../action/friends';
 
 class UserProfile extends Component {
   constructor(props) {
@@ -11,6 +11,7 @@ class UserProfile extends Component {
     this.state = {
       success: null,
       error: null,
+      successMessage: null,
     };
   }
 
@@ -23,6 +24,7 @@ class UserProfile extends Component {
     }
   }
 
+  //---- method to check if user is already a fried or not (to show add/remove button)
   checkIfUserIsAFriend = () => {
     console.log('this.props(userProfile)', this.props);
     const { match, friends } = this.props;
@@ -37,6 +39,7 @@ class UserProfile extends Component {
     return false;
   };
 
+  //---- method to add user as friend
   handleAddFriendClick = async () => {
     const userId = this.props.match.params.userId;
     const url = APIUrls.addFriend(userId);
@@ -55,9 +58,41 @@ class UserProfile extends Component {
     if (data) {
       this.setState({
         success: true,
+        successMessage: 'Added friend successfully!',
       });
 
       this.props.dispatch(addFriend(data.data.friendship));
+    } else {
+      this.setState({
+        success: null,
+        error: data.message,
+      });
+    }
+  };
+
+  //---- method to unFriend user
+  handleRemoveFriendClick = async () => {
+    const { match } = this.props;
+    const url = APIUrls.removeFriend(match.params.userId);
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Bearer ${getAuthTokenFromLocalStorage()}`,
+      },
+    };
+
+    const response = await fetch(url, options);
+    const data = await response.json();
+    //console.log('await data', data);
+
+    if (data.success) {
+      this.setState({
+        success: true,
+        successMessage: 'Removed friends successfully!',
+      });
+      this.props.dispatch(removeFriend(match.params.userId));
     } else {
       this.setState({
         success: null,
@@ -110,7 +145,12 @@ class UserProfile extends Component {
               Add Friend
             </button>
           ) : (
-            <button className="button save-btn">Remove Friend</button>
+            <button
+              className="button save-btn"
+              onClick={this.handleRemoveFriendClick}
+            >
+              UnFriend
+            </button>
           )}
 
           {success && (
