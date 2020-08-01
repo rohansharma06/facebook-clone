@@ -14,7 +14,7 @@ export default function friends(state = defaultProfileState, action) {
       return state.concat(action.friend);
     case REMOVE_FRIEND:
       const newArr = state.filter(
-        (friend) => friend.to_user._id != action.userId
+        (friend) => friend.to_user._id !== action.userId
       );
       return newArr;
     default:
