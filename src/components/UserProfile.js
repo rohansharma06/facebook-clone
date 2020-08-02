@@ -24,6 +24,25 @@ class UserProfile extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    //---- rename params to prevParams/currParams
+    const {
+      match: { params: prevParams },
+    } = prevProps;
+
+    const {
+      match: { params: currentParams },
+    } = this.props;
+
+    if (
+      prevProps &&
+      currentParams &&
+      prevParams.userId !== currentParams.userId
+    ) {
+      this.props.dispatch(fetchUserProfile(currentParams.userId));
+    }
+  }
+
   //---- method to check if user is already a fried or not (to show add/remove button)
   checkIfUserIsAFriend = () => {
     console.log('this.props(userProfile)', this.props);
