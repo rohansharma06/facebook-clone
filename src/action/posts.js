@@ -1,6 +1,7 @@
-import { UPDATE_POSTS, ADD_POST } from './actionTypes';
+import { UPDATE_POSTS, ADD_POST, ADD_COMMENT } from './actionTypes';
 import { APIUrls } from '../helpers/urls';
 import { getAuthTokenFromLocalStorage, getFormBody } from '../helpers/utils';
+
 //---- fetching post using API
 export function fetchPosts() {
   return (dispatch) => {
@@ -21,14 +22,6 @@ export function updatePosts(posts) {
   return {
     type: UPDATE_POSTS,
     posts,
-  };
-}
-
-//---- add Post when user create a post
-export function addPost(post) {
-  return {
-    type: ADD_POST,
-    post,
   };
 }
 
@@ -53,5 +46,44 @@ export function createPost(content) {
           dispatch(addPost(data.data.post));
         }
       });
+  };
+}
+
+//---- add Post when user create a post
+export function addPost(post) {
+  return {
+    type: ADD_POST,
+    post,
+  };
+}
+
+//---- add comment to the post API
+export function createComment(comment, postId) {
+  return (dispatch) => {
+    const url = APIUrls.createComment();
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Bearer ${getAuthTokenFromLocalStorage()}`,
+      },
+      body: getFormBody({ comment, post_id: postId }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          dispatch(addComment(data.data.comment, postId));
+        }
+      });
+  };
+}
+
+//----- call reducer to add comment to the post
+export function addComment(comment, postId) {
+  return {
+    type: ADD_COMMENT,
+    comment,
+    postId,
   };
 }
