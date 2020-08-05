@@ -120,6 +120,7 @@ code {
 .post-like {
   display: flex;
   align-items: center;
+  background-color: white;
 }
 .post-comments-icon {
   margin-left: 15px;
