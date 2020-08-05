@@ -44,6 +44,7 @@ class Post extends Component {
     this.props.dispatch(addLikeToStore(post._id, 'Post', user._id));
   };
 
+  //---- method to toggle comment display
   hadleShowComment = () => {
     var comment = this.state.showComments;
     {
@@ -54,12 +55,60 @@ class Post extends Component {
     });
   };
 
+  //---- method to display date
+  handleSetDate = (postDate) => {
+    //---- storing curr date
+    var today = new Date();
+    var currMonth = today.getMonth() + 1;
+    var currDate = today.getDate();
+
+    //console.log('CurrDate:', currMonth, currDate);
+    //---- storing post date
+    //var year = postDate.slice(0, 4);
+    var month = postDate.slice(5, 7);
+    var date = postDate.slice(8, 10);
+    var hour = postDate.slice(11, 13);
+    var minute = postDate.slice(14, 16);
+
+    if (month.slice(0, 1) === '0') {
+      month = month.slice(1, 2);
+    }
+    if (date.slice(0, 1) === '0') {
+      date = date.slice(1, 2);
+    }
+    //console.log('Date:', month, date);
+    //console.log('Time:', hour, minute);
+
+    if (currDate.toString() === date && currMonth.toString() === month) {
+      var finalDate = 'Today' + ' ' + 'at' + ' ' + hour + ':' + minute;
+      return finalDate;
+    } else {
+      var months = new Array(
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+      );
+      var finalDate =
+        months[month - 1] + ' ' + date + ' ' + 'at' + ' ' + hour + ':' + minute;
+      return finalDate;
+    }
+  };
+
   render() {
     const { post, user } = this.props;
     const { comment, showComments } = this.state;
 
     const isPostLikedByUser = post.likes.includes(user._id);
-
+    //console.log('POSTSSS:', post);
     return (
       <div className="post-wrapper" key={post._id}>
         <div className="post-header">
@@ -72,7 +121,9 @@ class Post extends Component {
             </Link>
             <div>
               <span className="post-author">{post.user.name}</span>
-              <span className="post-time">a minute ago</span>
+              <span className="post-time">
+                {this.handleSetDate(post.createdAt)}
+              </span>
             </div>
           </div>
           <div className="post-content">{post.content}</div>
