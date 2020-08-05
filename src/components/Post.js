@@ -48,8 +48,9 @@ class Post extends Component {
   hadleShowComment = () => {
     var comment = this.state.showComments;
     {
-      comment = comment ? false : true;
+      comment ? (comment = false) : (comment = true);
     }
+
     this.setState({
       showComments: comment,
     });
@@ -108,12 +109,18 @@ class Post extends Component {
     const { comment, showComments } = this.state;
 
     const isPostLikedByUser = post.likes.includes(user._id);
-    //console.log('POSTSSS:', post);
+
     return (
       <div className="post-wrapper" key={post._id}>
         <div className="post-header">
           <div className="post-avatar">
-            <Link to={`/user/${post.user._id}`}>
+            <Link
+              to={
+                user._id === post.user._id
+                  ? '/settings'
+                  : `/user/${post.user._id}`
+              }
+            >
               <img
                 src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
                 alt="user-pic"
