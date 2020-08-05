@@ -29,9 +29,12 @@ class CreatePost extends Component {
 
   //---- render start
   render() {
+    const { User } = this.props;
+    //console.log('NAME:', User);
     return (
       <div className="create-post">
         <textarea
+          placeholder={`What's on your mind, ${User}?`}
           className="add-post"
           value={this.state.content}
           onChange={this.handleChange}
@@ -47,6 +50,11 @@ class CreatePost extends Component {
   }
 }
 
+function mapStoreToProps({ auth }) {
+  return {
+    User: auth.user.name,
+  };
+}
 //--- here we just need dispatch
 //-- if we not make a function(mapStateToProps) it will automatically pass dispatch action
-export default connect()(CreatePost);
+export default connect(mapStoreToProps)(CreatePost);
