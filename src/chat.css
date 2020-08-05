@@ -5,10 +5,22 @@
   bottom: 0;
   right: 10px;
 }
+.chat-container-collape {
+  position: fixed;
+  bottom: -100px;
+  height: 400px;
+  width: 300px;
+  right: 10px;
+}
+.collapse {
+  position: fixed;
+  width: 300px;
+  bottom: 0;
+}
 .chat-header {
   font-size: 20px;
   padding: 10px;
-  background: #6200ee;
+  background: #0080ee99;
   color: #fff;
   height: 43px;
   box-sizing: border-box;
@@ -27,6 +39,7 @@
   border-left: 1px solid #e5e5e5;
   display: flex;
   flex-direction: column;
+  /* display: none; */
 }
 .chat-messages .chat-bubble {
   background: #e5e5e5;
@@ -71,6 +84,8 @@
   height: 37px;
   box-sizing: border-box;
   display: flex;
+
+  /* display: none; */
 }
 .chat-footer input {
   width: 100%;
