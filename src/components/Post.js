@@ -92,7 +92,7 @@ class Post extends Component {
           </div>
           <div className="post-comment-box">
             <input
-              placeholder="Start typing a comment"
+              placeholder="Start typing a comment..."
               onChange={this.handleOnCommentChange}
               onKeyPress={this.handleAddComment}
               value={comment}

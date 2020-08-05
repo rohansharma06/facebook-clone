@@ -13,7 +13,6 @@ class Navbar extends React.Component {
 
   handleSearch = (e) => {
     const searchText = e.target.value;
-
     this.props.dispatch(searchUsers(searchText));
   };
 

@@ -10,7 +10,7 @@ import { getAuthTokenFromLocalStorage, getFormBody } from '../helpers/utils';
 //---- fetching post using API
 export function fetchPosts() {
   return (dispatch) => {
-    const url = APIUrls.fetchPosts(1, 25);
+    const url = APIUrls.fetchPosts(1, 5);
     fetch(url)
       .then((response) => {
         return response.json();
