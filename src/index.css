@@ -523,3 +523,22 @@ nav .nav-links ul li:hover {
 #add-post-btn:hover {
   cursor: pointer;
 }
+
+/* ----- loader ---- */
+.loader {
+  border: 10px solid;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border-color: black transparent transparent;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+  margin-top: 20px;
+  display: block;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
