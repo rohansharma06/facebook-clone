@@ -10,6 +10,7 @@ class Chat extends Component {
     this.state = {
       messages: [], //--- message format {content: 'some message', self: true}
       typedMessage: '',
+      showChat: false,
     };
     this.socket = io.connect('http://54.237.158.65:5000');
     this.userEmail = props.user.email;
@@ -79,17 +80,30 @@ class Chat extends Component {
     }
   };
 
-  render() {
-    const { typedMessage, messages } = this.state;
+  handlecatbox = () => {
+    //console.log('chat1:', this.state.showChat);
+    var chat = this.state.showChat;
+    {
+      chat = chat ? false : true;
+    }
+    this.setState({
+      showChat: chat,
+    });
+  };
 
-    return (
+  render() {
+    const { typedMessage, messages, showChat } = this.state;
+    console.log('chat:', this.state.showChat);
+    return showChat ? (
       <div className="chat-container">
         <div className="chat-header">
           Chat
           <img
-            src="https://www.iconsdb.com/icons/preview/white/minus-5-xxl.png"
+            // src="https://www.iconsdb.com/icons/preview/white/minus-5-xxl.png"
+            src="https://image.flaticon.com/icons/svg/659/659892.svg"
             alt=""
-            height={17}
+            height={20}
+            onClick={this.handlecatbox}
           />
         </div>
 
@@ -114,6 +128,19 @@ class Chat extends Component {
             onChange={this.handleInputChange}
           />
           <button onClick={this.handleSubmit}>Submit</button>
+        </div>
+      </div>
+    ) : (
+      <div className="chat-container">
+        <div className="chat-header collapse">
+          Chat
+          <img
+            // src="https://www.iconsdb.com/icons/preview/white/minus-5-xxl.png"
+            src="https://image.flaticon.com/icons/svg/992/992651.svg"
+            alt=""
+            height={20}
+            onClick={this.handlecatbox}
+          />
         </div>
       </div>
     );
