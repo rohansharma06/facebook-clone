@@ -11,7 +11,6 @@ class PostsList extends Component {
         {posts.map((post) => (
           <Post post={post} key={post._id} />
         ))}
-        ;
       </div>
     );
   }
