@@ -6,18 +6,32 @@ import { logoutUser } from '../action/auth';
 import { searchUsers } from '../action/search';
 
 class Navbar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: '',
+    };
+  }
   logOut = () => {
     localStorage.removeItem('token');
     this.props.dispatch(logoutUser());
   };
 
+  //---- method to  save search text to state and dispatch action
   handleSearch = (e) => {
     const searchText = e.target.value;
+    this.setState({
+      text: searchText,
+    });
     this.props.dispatch(searchUsers(searchText));
+    this.setState({
+      text: searchText,
+    });
   };
 
   render() {
     const { auth, results } = this.props;
+    const { text } = this.state;
     return (
       <nav className="nav">
         <div className="left-div">
@@ -35,6 +49,14 @@ class Navbar extends React.Component {
             alt="search-icon"
           />
           <input placeholder="Search" onChange={this.handleSearch} />
+
+          {text.length > 0 && results.length == 0 && (
+            <div className="search-results">
+              <ul>
+                <li className="search-results-row loader"></li>
+              </ul>
+            </div>
+          )}
 
           {results.length > 0 && (
             <div className="search-results">
