@@ -47,12 +47,9 @@ class Post extends Component {
   //---- method to toggle comment display
   hadleShowComment = () => {
     var comment = this.state.showComments;
-    {
-      comment ? (comment = false) : (comment = true);
-    }
 
     this.setState({
-      showComments: comment,
+      showComments: !comment,
     });
   };
 
@@ -81,10 +78,10 @@ class Post extends Component {
     //console.log('Time:', hour, minute);
 
     if (currDate.toString() === date && currMonth.toString() === month) {
-      var finalDate = 'Today' + ' ' + 'at' + ' ' + hour + ':' + minute;
+      let finalDate = 'Today at ' + hour + ':' + minute;
       return finalDate;
     } else {
-      var months = new Array(
+      var months = [
         'January',
         'February',
         'March',
@@ -96,10 +93,10 @@ class Post extends Component {
         'September',
         'October',
         'November',
-        'December'
-      );
-      var finalDate =
-        months[month - 1] + ' ' + date + ' ' + 'at' + ' ' + hour + ':' + minute;
+        'December',
+      ];
+      let finalDate =
+        months[month - 1] + ' ' + date + ' at ' + hour + ':' + minute;
       return finalDate;
     }
   };

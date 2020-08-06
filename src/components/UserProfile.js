@@ -130,7 +130,7 @@ class UserProfile extends Component {
     const user = profile.user;
 
     if (profile.inProgress) {
-      return <h1 className="loader">.</h1>;
+      return <div className="loader"></div>;
     }
 
     const isUserAFriend = this.checkIfUserIsAFriend();

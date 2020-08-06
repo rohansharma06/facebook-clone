@@ -83,11 +83,9 @@ class Chat extends Component {
   handlecatbox = () => {
     //console.log('chat1:', this.state.showChat);
     var chat = this.state.showChat;
-    {
-      chat = chat ? false : true;
-    }
+
     this.setState({
-      showChat: chat,
+      showChat: !chat,
     });
   };
 
