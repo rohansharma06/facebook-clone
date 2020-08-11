@@ -2,7 +2,7 @@
 
 > This is a clone of facebook app made using React.
 
-To view: [Click here...]()
+To view: [Click here...](https://rohansharma06.github.io/facebook-clone/)
 
 ## Getting Started
 
