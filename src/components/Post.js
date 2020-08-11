@@ -53,7 +53,7 @@ class Post extends Component {
     });
   };
 
-  //---- method to display date
+  //---- method to display post date
   handleSetDate = (postDate) => {
     //---- storing curr date
     var today = new Date();
@@ -106,7 +106,6 @@ class Post extends Component {
     const { comment, showComments } = this.state;
 
     const isPostLikedByUser = post.likes.includes(user._id);
-
     return (
       <div className="post-wrapper" key={post._id}>
         <div className="post-header">

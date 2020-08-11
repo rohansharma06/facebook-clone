@@ -3,6 +3,7 @@ import {
   ADD_POST,
   ADD_COMMENT,
   UPDATE_POST_LIKE,
+  UPDATE_COMMENT_LIKE,
 } from './actionTypes';
 import { APIUrls } from '../helpers/urls';
 import { getAuthTokenFromLocalStorage, getFormBody } from '../helpers/utils';
@@ -30,7 +31,7 @@ export function updatePosts(posts) {
   };
 }
 
-//---- add post to the API DB
+//---- add post to the API
 export function createPost(content) {
   return (dispatch) => {
     const url = APIUrls.createPost();
@@ -84,7 +85,7 @@ export function createComment(content, postId) {
   };
 }
 
-//----- call reducer to add comment to the post
+//----- call reducer to add comment to the store
 export function addComment(comment, postId) {
   return {
     type: ADD_COMMENT,
@@ -94,7 +95,7 @@ export function addComment(comment, postId) {
 }
 
 //---- fectch API for toggle like on POST
-export function addLikeToStore(id, likeType, userId) {
+export function addLikeToStore(id, likeType, userId, postId) {
   return (dispatch) => {
     const url = APIUrls.toggleLike(id, likeType);
 
@@ -110,16 +111,30 @@ export function addLikeToStore(id, likeType, userId) {
         console.log('LIKE DATA', data);
 
         if (data.success) {
-          dispatch(addPostLike(id, userId));
+          if (likeType === 'Post') {
+            dispatch(addPostLike(id, userId));
+          } else {
+            //console.log('call me');
+            dispatch(addCommentLike(id, userId, postId));
+          }
         }
       });
   };
 }
-//---- Calling reducer to update post like status
+//---- Calling reducer to update post like status on store
 export function addPostLike(postId, userId) {
   return {
     type: UPDATE_POST_LIKE,
     postId,
     userId,
+  };
+}
+//---- Calling reducer to update Comment like status on store
+export function addCommentLike(commentId, userId, postId) {
+  return {
+    type: UPDATE_COMMENT_LIKE,
+    commentId,
+    userId,
+    postId,
   };
 }
