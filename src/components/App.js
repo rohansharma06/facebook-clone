@@ -82,7 +82,7 @@ class App extends React.Component {
           <Switch>
             <Route
               exact
-              path="/facebook-clone/"
+              path="/"
               render={(props) => {
                 return (
                   <Home
