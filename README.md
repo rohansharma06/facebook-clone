@@ -2,7 +2,48 @@
 
 > This is a clone of facebook app made using React.
 
-To view: [Click here...](https://rohansharma06.github.io/facebook-clone/)
+## Functionality
+
+- Login Page - using email and password.
+- SignUp Page - using name, email and password.
+- Home Page.
+- Add and Remove Friend.
+- Create Post and Comments.
+- Like Post and Comment.
+- Update User Profile Password.
+- ChatRoom
+
+## Preview
+
+![demo](/gif/demo.gif.gif)
+
+# Folder Structure
+
+.
+
+    ├── public
+        ├── index.html
+        ├── images
+    ├── src
+        ├── Action
+            ├── (contains all actions type and action creators)
+        ├── Component
+            ├── (contains different componebt used in websites)
+        ├── Helpers
+            ├── (contains different URLs for API call and other userfull data)
+        ├── Reducer
+            ├── (contains all reducers)
+        ├── Store
+            ├── (use react store to keep data)
+        ├── chat.css
+        ├── index.css
+        ├── index.js
+    ├── index.js
+    ├── package.json
+    ├── package-lock.json
+    ├── .gitignore
+
+.
 
 ## Getting Started
 
