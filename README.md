@@ -15,7 +15,7 @@
 
 ## Preview
 
-![demo](/gif/demo.gif.gif)
+![demo](/gif/gif.gif)
 
 # Folder Structure
 
